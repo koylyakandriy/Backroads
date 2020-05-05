@@ -1,14 +1,27 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql, Link } from "gatsby"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
+import StyledHero from "../components/StyledHero"
 
-const TourPage = () => (
+export const data = graphql`
+  {
+    tourBg: file(relativePath: { eq: "defaultBcg.jpeg" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 4160) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+  }
+`
+
+const TourPage = ({data}) => (
   <Layout>
     <SEO title="Page two" />
-    <h1>Tours</h1>
-    <Link to="/">Go back to the homepage</Link>
+    
+    <StyledHero img={data.tourBg.childImageSharp.fluid}/>
   </Layout>
 )
 

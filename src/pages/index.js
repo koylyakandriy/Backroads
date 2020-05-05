@@ -1,26 +1,39 @@
 import React from "react"
-import { Link } from "gatsby"
+import { graphql } from "gatsby"
+import AniLink from 'gatsby-plugin-transition-link/AniLink';
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import SimpleHero from "../components/SimpleHero"
 import Banner from "../components/Banner"
 import About from "../components/Home/About"
 import Services from "../components/Home/Services"
+import StyledHero from "../components/StyledHero"
 
-const IndexPage = () => (
+export const data = graphql`
+  {
+    aboutBg: file(relativePath: { eq: "defaultBcg.jpeg" }) {
+      childImageSharp {
+        fluid(quality: 90, maxWidth: 4160) {
+          ...GatsbyImageSharpFluid_withWebp
+        }
+      }
+    }
+  }
+`
+
+const IndexPage = ({data}) => (
   <Layout>
     <SEO title="Home" />
-    <SimpleHero>
+    <StyledHero home img={data.aboutBg.childImageSharp.fluid}>
       <Banner
         title="continue exploring"
         info="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur modi odio quia repellat voluptate voluptatum?"
       >
-        <Link to="/tours" className="btn-white">
+        <AniLink fade to="/tours" className="btn-white">
           Explore tours
-        </Link>
+        </AniLink>
       </Banner>
-    </SimpleHero>
+    </StyledHero>
     <About />
     <Services />
   </Layout>
