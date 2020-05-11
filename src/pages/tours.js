@@ -4,6 +4,7 @@ import { graphql } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import StyledHero from "../components/StyledHero"
+import Tours from "../components/Tours/Tours"
 
 export const data = graphql`
   {
@@ -22,6 +23,7 @@ const TourPage = ({data}) => (
     <SEO title="Page two" />
     
     <StyledHero img={data.tourBg.childImageSharp.fluid}/>
+    <Tours />
   </Layout>
 )
 

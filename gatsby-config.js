@@ -7,6 +7,9 @@ module.exports = {
     title: `Backroads`,
     description: `Travel agency`,
     author: `@koylyak`,
+    image: `src/images/defaultBcg.jpeg`,
+    twitterUsername: "@koylyak",
+    siteUrl: "https://backroads-if.netlify.com"
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -42,7 +45,16 @@ module.exports = {
         accessToken: process.env.CONTENT_ACCESS_TOKEN,
       },
     },
-    `gatsby-plugin-playground`
+    `gatsby-plugin-playground`,
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: 'gatsby-plugin-robots-txt',
+      options: {
+        host: 'https://backroads-if.netlify.com',
+        sitemap: 'https://backroads-if.netlify.com/sitemap.xml',
+        policy: [{ userAgent: '*', allow: '/' }]
+      }
+    }
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
